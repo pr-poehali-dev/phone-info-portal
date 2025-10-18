@@ -19,33 +19,185 @@ interface PhoneData {
   imageUrl: string;
 }
 
+interface PhoneModel {
+  name: string;
+  processor: string;
+  ram: string;
+  storage: string;
+  camera: string;
+  battery: string;
+  display: string;
+  price: string;
+  imageUrl: string;
+}
+
+interface Brand {
+  name: string;
+  logo: string;
+  models: PhoneModel[];
+}
+
+const brandsData: Brand[] = [
+  {
+    name: 'Apple',
+    logo: '🍎',
+    models: [
+      {
+        name: 'iPhone 15 Pro Max',
+        processor: 'A17 Pro',
+        ram: '8 GB',
+        storage: '256 GB',
+        camera: '48 MP',
+        battery: '4422 mAh',
+        display: '6.7" OLED',
+        price: '119 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1695048064698-9c6a2b1ec03b?w=400'
+      },
+      {
+        name: 'iPhone 15',
+        processor: 'A16 Bionic',
+        ram: '6 GB',
+        storage: '128 GB',
+        camera: '48 MP',
+        battery: '3349 mAh',
+        display: '6.1" OLED',
+        price: '79 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1695048064698-9c6a2b1ec03b?w=400'
+      }
+    ]
+  },
+  {
+    name: 'Samsung',
+    logo: '📱',
+    models: [
+      {
+        name: 'Galaxy S24 Ultra',
+        processor: 'Snapdragon 8 Gen 3',
+        ram: '12 GB',
+        storage: '256 GB',
+        camera: '200 MP',
+        battery: '5000 mAh',
+        display: '6.8" AMOLED',
+        price: '109 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400'
+      },
+      {
+        name: 'Galaxy S24',
+        processor: 'Exynos 2400',
+        ram: '8 GB',
+        storage: '128 GB',
+        camera: '50 MP',
+        battery: '4000 mAh',
+        display: '6.2" AMOLED',
+        price: '79 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400'
+      }
+    ]
+  },
+  {
+    name: 'Xiaomi',
+    logo: '⚡',
+    models: [
+      {
+        name: 'Xiaomi 14 Pro',
+        processor: 'Snapdragon 8 Gen 3',
+        ram: '12 GB',
+        storage: '256 GB',
+        camera: '50 MP',
+        battery: '4880 mAh',
+        display: '6.73" AMOLED',
+        price: '69 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400'
+      },
+      {
+        name: 'Redmi Note 13 Pro',
+        processor: 'Snapdragon 7s Gen 2',
+        ram: '8 GB',
+        storage: '256 GB',
+        camera: '200 MP',
+        battery: '5100 mAh',
+        display: '6.67" AMOLED',
+        price: '29 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400'
+      }
+    ]
+  },
+  {
+    name: 'OnePlus',
+    logo: '1️⃣',
+    models: [
+      {
+        name: 'OnePlus 12',
+        processor: 'Snapdragon 8 Gen 3',
+        ram: '16 GB',
+        storage: '512 GB',
+        camera: '50 MP',
+        battery: '5400 mAh',
+        display: '6.82" AMOLED',
+        price: '64 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400'
+      }
+    ]
+  },
+  {
+    name: 'Nothing',
+    logo: '⭕',
+    models: [
+      {
+        name: 'Nothing Phone (2)',
+        processor: 'Snapdragon 8+ Gen 1',
+        ram: '12 GB',
+        storage: '256 GB',
+        camera: '50 MP',
+        battery: '4700 mAh',
+        display: '6.7" OLED',
+        price: '54 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400'
+      }
+    ]
+  },
+  {
+    name: 'Google',
+    logo: '🔍',
+    models: [
+      {
+        name: 'Pixel 8 Pro',
+        processor: 'Google Tensor G3',
+        ram: '12 GB',
+        storage: '128 GB',
+        camera: '50 MP',
+        battery: '5050 mAh',
+        display: '6.7" OLED',
+        price: '89 990 ₽',
+        imageUrl: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400'
+      }
+    ]
+  }
+];
+
 const Index = () => {
   const [activeTab, setActiveTab] = useState('news');
-  const [showAddPhone, setShowAddPhone] = useState(false);
-  const [phoneAdded, setPhoneAdded] = useState(false);
-  const [phoneData, setPhoneData] = useState<PhoneData>({
-    brand: '',
-    model: '',
-    processor: '',
-    ram: '',
-    storage: '',
-    camera: '',
-    battery: '',
-    display: '',
-    price: '',
-    imageUrl: ''
-  });
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedModel, setSelectedModel] = useState<PhoneModel | null>(null);
 
-  const handleAddPhone = () => {
-    if (phoneData.brand && phoneData.model) {
-      setPhoneAdded(true);
-      setShowAddPhone(false);
+  const handleBrandSelect = (brandName: string) => {
+    setSelectedBrand(brandName);
+    setSelectedModel(null);
+  };
+
+  const handleModelSelect = (model: PhoneModel, brandName: string) => {
+    setSelectedModel(model);
+  };
+
+  const handleBack = () => {
+    if (selectedModel) {
+      setSelectedModel(null);
+    } else if (selectedBrand) {
+      setSelectedBrand(null);
     }
   };
 
-  const handleInputChange = (field: keyof PhoneData, value: string) => {
-    setPhoneData(prev => ({ ...prev, [field]: value }));
-  };
+  const selectedBrandData = brandsData.find(b => b.name === selectedBrand);
 
 
 
@@ -134,263 +286,155 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="myphone" className="animate-slide-up">
-            {!phoneAdded && !showAddPhone && (
-              <Card className="overflow-hidden border-2 border-green-200">
-                <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500" />
-                <CardContent className="pt-12 pb-12 text-center">
-                  <Icon name="Smartphone" size={64} className="mx-auto mb-4 text-green-500" />
-                  <CardTitle className="text-3xl mb-4">Ваш смартфон</CardTitle>
-                  <CardDescription className="text-lg mb-6">
-                    Добавьте свой телефон, чтобы увидеть его характеристики, рейтинг и всю важную информацию
-                  </CardDescription>
-                  <button 
-                    onClick={() => setShowAddPhone(true)}
-                    className="px-8 py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold hover:shadow-xl transition-all hover:scale-105"
-                  >
-                    <Icon name="Plus" size={20} className="inline mr-2" />
-                    Добавить смартфон
-                  </button>
-                </CardContent>
-              </Card>
+            {!selectedBrand && (
+              <div>
+                <Card className="overflow-hidden border-2 border-green-200 mb-6">
+                  <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500" />
+                  <CardContent className="pt-8 pb-8 text-center">
+                    <Icon name="Smartphone" size={48} className="mx-auto mb-3 text-green-500" />
+                    <CardTitle className="text-2xl mb-2">Выберите бренд</CardTitle>
+                    <CardDescription className="text-base">
+                      Выберите производителя вашего смартфона
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {brandsData.map((brand) => (
+                    <button
+                      key={brand.name}
+                      onClick={() => handleBrandSelect(brand.name)}
+                      className="p-6 rounded-2xl bg-white border-2 border-gray-200 hover:border-green-400 hover:shadow-xl transition-all hover:scale-105 group"
+                    >
+                      <div className="text-5xl mb-3">{brand.logo}</div>
+                      <h3 className="text-xl font-bold group-hover:text-green-600 transition-colors">{brand.name}</h3>
+                      <p className="text-sm text-muted-foreground mt-1">{brand.models.length} моделей</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
 
-            {showAddPhone && (
-              <Card className="overflow-hidden border-2 border-green-200">
-                <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500" />
-                <CardHeader>
-                  <CardTitle className="text-2xl">Добавить смартфон</CardTitle>
-                  <CardDescription>Заполните информацию о вашем телефоне</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="brand">Бренд</Label>
-                      <Input 
-                        id="brand" 
-                        placeholder="Apple, Samsung, Xiaomi..." 
-                        value={phoneData.brand}
-                        onChange={(e) => handleInputChange('brand', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="model">Модель</Label>
-                      <Input 
-                        id="model" 
-                        placeholder="iPhone 15 Pro Max" 
-                        value={phoneData.model}
-                        onChange={(e) => handleInputChange('model', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="processor">Процессор</Label>
-                      <Input 
-                        id="processor" 
-                        placeholder="A17 Pro" 
-                        value={phoneData.processor}
-                        onChange={(e) => handleInputChange('processor', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="ram">RAM</Label>
-                      <Input 
-                        id="ram" 
-                        placeholder="8 GB" 
-                        value={phoneData.ram}
-                        onChange={(e) => handleInputChange('ram', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="storage">Память</Label>
-                      <Input 
-                        id="storage" 
-                        placeholder="256 GB" 
-                        value={phoneData.storage}
-                        onChange={(e) => handleInputChange('storage', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="camera">Камера</Label>
-                      <Input 
-                        id="camera" 
-                        placeholder="48 MP" 
-                        value={phoneData.camera}
-                        onChange={(e) => handleInputChange('camera', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="battery">Батарея</Label>
-                      <Input 
-                        id="battery" 
-                        placeholder="4422 mAh" 
-                        value={phoneData.battery}
-                        onChange={(e) => handleInputChange('battery', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="display">Дисплей</Label>
-                      <Input 
-                        id="display" 
-                        placeholder='6.7" OLED' 
-                        value={phoneData.display}
-                        onChange={(e) => handleInputChange('display', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="price">Цена</Label>
-                      <Input 
-                        id="price" 
-                        placeholder="99 990 ₽" 
-                        value={phoneData.price}
-                        onChange={(e) => handleInputChange('price', e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="image">URL изображения</Label>
-                      <Input 
-                        id="image" 
-                        placeholder="https://example.com/phone.jpg" 
-                        value={phoneData.imageUrl}
-                        onChange={(e) => handleInputChange('imageUrl', e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex gap-3 pt-4">
-                    <button 
-                      onClick={handleAddPhone}
-                      className="flex-1 px-6 py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold hover:shadow-xl transition-all hover:scale-105"
+            {selectedBrand && !selectedModel && selectedBrandData && (
+              <div>
+                <button
+                  onClick={handleBack}
+                  className="mb-4 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex items-center gap-2"
+                >
+                  <Icon name="ArrowLeft" size={16} />
+                  Назад к брендам
+                </button>
+                <Card className="overflow-hidden border-2 border-green-200 mb-6">
+                  <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500" />
+                  <CardContent className="pt-8 pb-8 text-center">
+                    <div className="text-5xl mb-3">{selectedBrandData.logo}</div>
+                    <CardTitle className="text-2xl mb-2">{selectedBrand}</CardTitle>
+                    <CardDescription className="text-base">
+                      Выберите модель телефона
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {selectedBrandData.models.map((model, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleModelSelect(model, selectedBrand)}
+                      className="p-4 rounded-2xl bg-white border-2 border-gray-200 hover:border-green-400 hover:shadow-xl transition-all hover:scale-105 text-left group"
                     >
-                      <Icon name="Check" size={20} className="inline mr-2" />
-                      Сохранить
+                      <div className="flex items-center gap-4 mb-3">
+                        <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Icon name="Smartphone" size={32} className="text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold group-hover:text-green-600 transition-colors">{model.name}</h3>
+                          <p className="text-sm text-muted-foreground">{model.processor}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="text-lg font-semibold text-green-600">{model.price}</p>
+                        <Icon name="ChevronRight" size={20} className="text-gray-400 group-hover:text-green-600 transition-colors" />
+                      </div>
                     </button>
-                    <button 
-                      onClick={() => setShowAddPhone(false)}
-                      className="px-6 py-3 rounded-full bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold hover:shadow-lg transition-shadow"
-                    >
-                      Отмена
-                    </button>
-                  </div>
-                </CardContent>
-              </Card>
+                  ))}
+                </div>
+              </div>
             )}
 
-            {phoneAdded && (
-              <div className="space-y-6">
+            {selectedModel && (
+              <div>
+                <button
+                  onClick={handleBack}
+                  className="mb-4 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex items-center gap-2"
+                >
+                  <Icon name="ArrowLeft" size={16} />
+                  Назад к моделям
+                </button>
                 <Card className="overflow-hidden border-2 border-green-200">
                   <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500" />
                   <CardContent className="pt-8">
                     <div className="flex flex-col md:flex-row gap-8">
                       <div className="flex-shrink-0">
-                        {phoneData.imageUrl ? (
-                          <img 
-                            src={phoneData.imageUrl} 
-                            alt={`${phoneData.brand} ${phoneData.model}`}
-                            className="w-full md:w-64 h-auto rounded-lg shadow-lg object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                            }}
-                          />
-                        ) : null}
-                        <div className={phoneData.imageUrl ? 'hidden' : 'w-full md:w-64 h-80 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg shadow-lg flex items-center justify-center'}>
+                        <img 
+                          src={selectedModel.imageUrl} 
+                          alt={selectedModel.name}
+                          className="w-full md:w-64 h-auto rounded-lg shadow-lg object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                            (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+                          }}
+                        />
+                        <div className="hidden w-full md:w-64 h-80 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg shadow-lg flex items-center justify-center">
                           <Icon name="Smartphone" size={80} className="text-white/50" />
                         </div>
                       </div>
                       <div className="flex-1">
                         <div className="mb-6">
-                          <p className="text-sm text-muted-foreground mb-1">{phoneData.brand}</p>
-                          <h2 className="text-4xl font-bold mb-2">{phoneData.model}</h2>
-                          {phoneData.price && (
-                            <p className="text-2xl font-semibold text-green-600">{phoneData.price}</p>
-                          )}
+                          <p className="text-sm text-muted-foreground mb-1">{selectedBrand}</p>
+                          <h2 className="text-4xl font-bold mb-2">{selectedModel.name}</h2>
+                          <p className="text-2xl font-semibold text-green-600">{selectedModel.price}</p>
                         </div>
                         <div className="grid md:grid-cols-2 gap-4">
-                          {phoneData.processor && (
-                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
-                              <Icon name="Cpu" size={24} className="text-purple-500" />
-                              <div>
-                                <p className="text-xs text-muted-foreground">Процессор</p>
-                                <p className="font-semibold">{phoneData.processor}</p>
-                              </div>
+                          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                            <Icon name="Cpu" size={24} className="text-purple-500" />
+                            <div>
+                              <p className="text-xs text-muted-foreground">Процессор</p>
+                              <p className="font-semibold">{selectedModel.processor}</p>
                             </div>
-                          )}
-                          {phoneData.ram && (
-                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg">
-                              <Icon name="MemoryStick" size={24} className="text-blue-500" />
-                              <div>
-                                <p className="text-xs text-muted-foreground">RAM</p>
-                                <p className="font-semibold">{phoneData.ram}</p>
-                              </div>
+                          </div>
+                          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg">
+                            <Icon name="MemoryStick" size={24} className="text-blue-500" />
+                            <div>
+                              <p className="text-xs text-muted-foreground">RAM</p>
+                              <p className="font-semibold">{selectedModel.ram}</p>
                             </div>
-                          )}
-                          {phoneData.storage && (
-                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg">
-                              <Icon name="HardDrive" size={24} className="text-cyan-500" />
-                              <div>
-                                <p className="text-xs text-muted-foreground">Память</p>
-                                <p className="font-semibold">{phoneData.storage}</p>
-                              </div>
+                          </div>
+                          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg">
+                            <Icon name="HardDrive" size={24} className="text-cyan-500" />
+                            <div>
+                              <p className="text-xs text-muted-foreground">Память</p>
+                              <p className="font-semibold">{selectedModel.storage}</p>
                             </div>
-                          )}
-                          {phoneData.camera && (
-                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg">
-                              <Icon name="Camera" size={24} className="text-pink-500" />
-                              <div>
-                                <p className="text-xs text-muted-foreground">Камера</p>
-                                <p className="font-semibold">{phoneData.camera}</p>
-                              </div>
+                          </div>
+                          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg">
+                            <Icon name="Camera" size={24} className="text-pink-500" />
+                            <div>
+                              <p className="text-xs text-muted-foreground">Камера</p>
+                              <p className="font-semibold">{selectedModel.camera}</p>
                             </div>
-                          )}
-                          {phoneData.battery && (
-                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg">
-                              <Icon name="Battery" size={24} className="text-green-500" />
-                              <div>
-                                <p className="text-xs text-muted-foreground">Батарея</p>
-                                <p className="font-semibold">{phoneData.battery}</p>
-                              </div>
+                          </div>
+                          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg">
+                            <Icon name="Battery" size={24} className="text-green-500" />
+                            <div>
+                              <p className="text-xs text-muted-foreground">Батарея</p>
+                              <p className="font-semibold">{selectedModel.battery}</p>
                             </div>
-                          )}
-                          {phoneData.display && (
-                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg">
-                              <Icon name="Monitor" size={24} className="text-orange-500" />
-                              <div>
-                                <p className="text-xs text-muted-foreground">Дисплей</p>
-                                <p className="font-semibold">{phoneData.display}</p>
-                              </div>
+                          </div>
+                          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg">
+                            <Icon name="Monitor" size={24} className="text-orange-500" />
+                            <div>
+                              <p className="text-xs text-muted-foreground">Дисплей</p>
+                              <p className="font-semibold">{selectedModel.display}</p>
                             </div>
-                          )}
-                        </div>
-                        <div className="mt-6 flex gap-3">
-                          <button 
-                            onClick={() => {
-                              setPhoneAdded(false);
-                              setShowAddPhone(true);
-                            }}
-                            className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg transition-shadow"
-                          >
-                            <Icon name="Edit" size={16} className="inline mr-2" />
-                            Редактировать
-                          </button>
-                          <button 
-                            onClick={() => {
-                              setPhoneAdded(false);
-                              setPhoneData({
-                                brand: '',
-                                model: '',
-                                processor: '',
-                                ram: '',
-                                storage: '',
-                                camera: '',
-                                battery: '',
-                                display: '',
-                                price: '',
-                                imageUrl: ''
-                              });
-                            }}
-                            className="px-6 py-2 rounded-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-semibold hover:shadow-lg transition-shadow"
-                          >
-                            <Icon name="Trash2" size={16} className="inline mr-2" />
-                            Удалить
-                          </button>
+                          </div>
                         </div>
                       </div>
                     </div>
