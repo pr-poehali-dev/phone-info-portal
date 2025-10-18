@@ -6,6 +6,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('news');
+  const [showAddPhone, setShowAddPhone] = useState(false);
 
 
 
@@ -41,7 +42,7 @@ const Index = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8 bg-white/80 backdrop-blur-lg">
+          <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-8 bg-white/80 backdrop-blur-lg">
             <TabsTrigger value="news" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white">
               <Icon name="Newspaper" size={16} className="mr-2" />
               Новости
@@ -53,6 +54,10 @@ const Index = () => {
             <TabsTrigger value="ratings" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white">
               <Icon name="Trophy" size={16} className="mr-2" />
               Рейтинги
+            </TabsTrigger>
+            <TabsTrigger value="myphone" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white">
+              <Icon name="Smartphone" size={16} className="mr-2" />
+              Ваш смартфон
             </TabsTrigger>
           </TabsList>
 
@@ -87,6 +92,45 @@ const Index = () => {
                 <CardDescription className="text-lg">Скоро здесь появятся рейтинги и обзоры лучших смартфонов</CardDescription>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="myphone" className="animate-slide-up">
+            {!showAddPhone ? (
+              <Card className="overflow-hidden border-2 border-green-200">
+                <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500" />
+                <CardContent className="pt-12 pb-12 text-center">
+                  <Icon name="Smartphone" size={64} className="mx-auto mb-4 text-green-500" />
+                  <CardTitle className="text-3xl mb-4">Ваш смартфон</CardTitle>
+                  <CardDescription className="text-lg mb-6">
+                    Добавьте свой телефон, чтобы узнать его характеристики, рейтинг и всю важную информацию
+                  </CardDescription>
+                  <button 
+                    onClick={() => setShowAddPhone(true)}
+                    className="px-8 py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold hover:shadow-xl transition-all hover:scale-105"
+                  >
+                    <Icon name="Plus" size={20} className="inline mr-2" />
+                    Добавить смартфон
+                  </button>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="overflow-hidden border-2 border-green-200">
+                <div className="h-2 bg-gradient-to-r from-green-500 to-emerald-500" />
+                <CardContent className="pt-12 pb-12 text-center">
+                  <Icon name="Rocket" size={64} className="mx-auto mb-4 text-green-500 animate-pulse" />
+                  <CardTitle className="text-3xl mb-2">Coming Soon</CardTitle>
+                  <CardDescription className="text-lg mb-6">
+                    Функция добавления смартфона в разработке
+                  </CardDescription>
+                  <button 
+                    onClick={() => setShowAddPhone(false)}
+                    className="px-6 py-2 rounded-full bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold hover:shadow-lg transition-shadow"
+                  >
+                    Назад
+                  </button>
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
         </Tabs>
       </main>
