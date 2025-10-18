@@ -101,7 +101,10 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50 relative">
+      <div className="fixed left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-transparent pointer-events-none z-40"></div>
+      <div className="fixed right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-orange-500/20 via-pink-500/20 to-transparent pointer-events-none z-40"></div>
+      
       <header className="bg-white/80 backdrop-blur-lg border-b border-purple-100 sticky top-0 z-50 relative overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-purple-500 via-pink-500 to-transparent"></div>
         <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-orange-500 via-pink-500 to-transparent"></div>
@@ -114,7 +117,7 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
             Мир мобильных технологий
