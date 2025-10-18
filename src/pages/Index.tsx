@@ -230,7 +230,7 @@ const Index = () => {
                       <Label htmlFor="display">Дисплей</Label>
                       <Input 
                         id="display" 
-                        placeholder="6.7\" OLED" 
+                        placeholder='6.7" OLED' 
                         value={phoneData.display}
                         onChange={(e) => handleInputChange('display', e.target.value)}
                       />
