@@ -102,18 +102,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50">
-      <header className="bg-white/80 backdrop-blur-lg border-b border-purple-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent font-orbitron tracking-wider">
+      <header className="bg-white/80 backdrop-blur-lg border-b border-purple-100 sticky top-0 z-50 relative overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-purple-500 via-pink-500 to-transparent"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-orange-500 via-pink-500 to-transparent"></div>
+        <div className="container mx-auto px-4 py-6 relative z-10">
+          <div className="flex items-center justify-center">
+            <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent font-orbitron tracking-wider">
               FOLLOW TECH
             </h1>
-            <div className="flex gap-2">
-              <Badge variant="secondary" className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
-                <Icon name="TrendingUp" size={14} className="mr-1" />
-                Новинки
-              </Badge>
-            </div>
           </div>
         </div>
       </header>
