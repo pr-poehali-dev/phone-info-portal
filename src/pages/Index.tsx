@@ -105,8 +105,8 @@ const Index = () => {
       <header className="bg-white/80 backdrop-blur-lg border-b border-purple-100 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
-              📱 PhoneHub
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent font-orbitron tracking-wider">
+              FOLLOW TECH
             </h1>
             <div className="flex gap-2">
               <Badge variant="secondary" className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
@@ -273,7 +273,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="text-muted-foreground">
-              © 2025 PhoneHub. Все о мобильных технологиях
+              © 2025 FOLLOW TECH. Все о мобильных технологиях
             </p>
           </div>
         </div>
